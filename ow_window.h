@@ -16,7 +16,7 @@ public:
     void destroy();
 
     bool isKeyPressed(int vk);
-    void drawImage(const std::string& path, float x, float y, float width, float height);
+    void drawImage(const std::string& path, float x, float y, float width, float height, float alpha = 1.0f);
 
 private:
     HWND hwnd = nullptr;
