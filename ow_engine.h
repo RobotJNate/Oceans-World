@@ -12,11 +12,16 @@ enum class MenuState
 struct MenuItem
 {
     std::string name;
-    bool enabled = true;        // for Freeplay or disabled buttons
-    bool isPlaceholder = false; // * buttons
-    std::string texNormal;      // normal image
-    std::string texHighlight;   // highlighted image
+    bool enabled = true;
+    bool isPlaceholder = false;
+    std::string texNormal;
+    std::string texHighlight;
+
+    // smooth scaling
+    float currentScale = 1.0f;
+    float targetScale = 1.0f;
 };
+
 
 class OW_Engine
 {
