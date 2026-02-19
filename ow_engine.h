@@ -1,7 +1,7 @@
 #pragma once
 #include "ow_window.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 enum class MenuState
 {
@@ -17,11 +17,9 @@ struct MenuItem
     std::string texNormal;
     std::string texHighlight;
 
-    // smooth scaling
     float currentScale = 1.0f;
     float targetScale = 1.0f;
 };
-
 
 class OW_Engine
 {
@@ -34,32 +32,31 @@ private:
     void processInput();
     void update(float deltaTime);
     void render();
-
     void renderMenu();
     void renderSettings();
+    void startFade(MenuState toMenu);
 
     bool running = false;
     OW_Window window;
 
-    float menuAlpha = 1.0f;       // current alpha for fade
-    float targetAlpha = 1.0f;     // target alpha for fade
-    bool fading = false;           // whether a fade is happening
-    MenuState nextMenu;            // menu to switch to after fade
-    float fadeSpeed = 3.0f;        // speed of fade
-
-    void startFade(MenuState toMenu); // triggers fade to another menu
-
-    MenuItem backButton; // Back button for settings menu
-
-    // menu
-    MenuState currentMenu = MenuState::MAIN;
     std::vector<MenuItem> mainMenuItems;
     std::vector<MenuItem> settingsMenuItems;
-    int selectedIndex = 0;
+    MenuItem backButton;
 
-    // Settings
-    int volume = 3;         // 1-10
-    bool downscroll = false;
+    int selectedIndex = 0;
+    bool settingsBackSelected = false;
+
+    MenuState currentMenu;
+
+    // menu fade
+    float menuAlpha = 1.0f;
+    float targetAlpha = 1.0f;
+    bool fading = false;
+    MenuState nextMenu;
+    float fadeSpeed = 3.0f;
+
+    // example volume setting
+    int volume = 3;
 
     // menu music
     std::string menuMusicPath;
