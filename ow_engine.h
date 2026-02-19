@@ -49,6 +49,8 @@ private:
 
     void startFade(MenuState toMenu); // triggers fade to another menu
 
+    MenuItem backButton; // Back button for settings menu
+
     // menu
     MenuState currentMenu = MenuState::MAIN;
     std::vector<MenuItem> mainMenuItems;
