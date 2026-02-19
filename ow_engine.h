@@ -41,6 +41,14 @@ private:
     bool running = false;
     OW_Window window;
 
+    float menuAlpha = 1.0f;       // current alpha for fade
+    float targetAlpha = 1.0f;     // target alpha for fade
+    bool fading = false;           // whether a fade is happening
+    MenuState nextMenu;            // menu to switch to after fade
+    float fadeSpeed = 3.0f;        // speed of fade
+
+    void startFade(MenuState toMenu); // triggers fade to another menu
+
     // menu
     MenuState currentMenu = MenuState::MAIN;
     std::vector<MenuItem> mainMenuItems;
