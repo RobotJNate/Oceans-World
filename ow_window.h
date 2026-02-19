@@ -3,8 +3,6 @@
 #include <string>
 #include <unordered_map>
 
-void drawRect(float x, float y, float width, float height, int r, int g, int b);
-
 class OW_Window
 {
 public:
@@ -17,13 +15,13 @@ public:
     void endFrame();
     void destroy();
 
-    bool isKeyPressed(int vk); // check if a key is down
+    bool isKeyPressed(int vk); // check key state
+    void drawRect(float x, float y, float width, float height, int r, int g, int b);
 
 private:
     HWND hwnd = nullptr;
     bool running = false;
-
-    std::unordered_map<int, bool> keyStates; // VK key -> pressed state
+    std::unordered_map<int, bool> keyStates; // VK key -> pressed
 
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
