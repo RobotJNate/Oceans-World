@@ -7,8 +7,7 @@
 
 bool OW_Engine::init()
 {
-    // fullscreen = true for fullscreen, false for windowed
-    if (!window.create(1280, 720, "Ocean's Funky World", true))
+    if (!window.create(1280, 720, "Ocean's Funky World", true)) // fullscreen = true
         return false;
 
     // main menu
@@ -66,15 +65,13 @@ void OW_Engine::shutdown()
 {
     mciSendString("stop menuMusic", nullptr, 0, nullptr);
     mciSendString("close menuMusic", nullptr, 0, nullptr);
-
     window.destroy();
-    std::cout << "Engine shutdown complete.\n";
 }
 
 void OW_Engine::startFade(MenuState toMenu)
 {
     fading = true;
-    targetAlpha = 0.0f; // fade out
+    targetAlpha = 0.0f;
     nextMenu = toMenu;
 }
 
@@ -85,7 +82,7 @@ void OW_Engine::processInput()
     static bool enterPressedLast = false;
 
     auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
-    int maxIndex = (currentMenu == MenuState::SETTINGS) ? settingsMenuItems.size() : items.size();
+    int maxIndex = (currentMenu == MenuState::SETTINGS) ? settingsMenuItems.size() + 1 : items.size();
 
     // UP
     if (window.isKeyPressed(VK_UP))
@@ -134,7 +131,7 @@ void OW_Engine::processInput()
                         selected.name = "Volume: " + std::to_string(volume);
                     }
                 }
-                else // last "index" = Back button
+                else // Back button
                 {
                     startFade(MenuState::MAIN);
                 }
@@ -151,7 +148,7 @@ void OW_Engine::processInput()
         else running = false;
     }
 
-    // track back button selection
+    // back button selection
     if (currentMenu == MenuState::SETTINGS && selectedIndex == settingsMenuItems.size())
         settingsBackSelected = true;
     else
@@ -162,24 +159,20 @@ void OW_Engine::update(float deltaTime)
 {
     auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
 
-    // button target scales
+    float speed = 8.0f;
     for (int i = 0; i < items.size(); i++)
         items[i].targetScale = (i == selectedIndex) ? 1.0145f : 1.0f;
 
-    // easing tween
-    float speed = 8.0f;
     for (auto& item : items)
     {
         float diff = item.targetScale - item.currentScale;
         item.currentScale += diff * (1 - expf(-speed * deltaTime));
     }
 
-    // back button scaling
     backButton.targetScale = settingsBackSelected ? 1.0145f : 1.0f;
     float diff = backButton.targetScale - backButton.currentScale;
     backButton.currentScale += diff * (1 - expf(-speed * deltaTime));
 
-    // menu fade tween
     if (fading)
     {
         float diffAlpha = targetAlpha - menuAlpha;
@@ -208,30 +201,7 @@ void OW_Engine::render()
 
 void OW_Engine::renderMenu()
 {
-    int startY = 150;
-    int spacing = 80;
-
-    for (int i = 0; i < mainMenuItems.size(); i++)
-    {
-        MenuItem& item = mainMenuItems[i];
-        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
-        float scale = item.currentScale;
-
-        float w = 480 * scale;
-        float h = 60 * scale;
-        float x = 400 - (w - 480)/2;
-        float y = startY + i * spacing - (h - 60)/2;
-
-        window.drawImage(tex, x, y, w, h, menuAlpha);
-    }
-}
-
-void OW_Engine::renderSettings()
-{
-    int startY = 150;
-    int spacing = 80;
-
-    for (int i = 0; i < settingsMenuItems.size(); i++)
-    {
-        MenuItem& item = settingsMenuItems[i];
-        std:
+    float btnW = window.getWidth()  * 0.375f;
+    float btnH = window.getHeight() * 0.083f;
+    float startY = window.getHeight() * 0.208f;
+    f
