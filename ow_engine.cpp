@@ -146,8 +146,23 @@ void OW_Engine::processInput()
 
 void OW_Engine::update(float deltaTime)
 {
-    // menu uses processInput for everything
+    auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
+
+    // set target scale based on selection
+    for (int i = 0; i < items.size(); i++)
+    {
+        items[i].targetScale = (i == selectedIndex) ? 1.0145f : 1.0f;
+    }
+
+    // easing out tween for scaling
+    float speed = 8.0f; // tweak this for faster/slower easing
+    for (auto& item : items)
+    {
+        float diff = item.targetScale - item.currentScale;
+        item.currentScale += diff * (1 - expf(-speed * deltaTime));
+    }
 }
+
 
 void OW_Engine::render()
 {
@@ -171,7 +186,7 @@ void OW_Engine::renderMenu()
         MenuItem& item = mainMenuItems[i];
 
         std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
-        float scale = (i == selectedIndex) ? 1.0145f : 1.0f;
+        float scale = item.currentScale;
 
         float w = 480 * scale;
         float h = 60 * scale;
@@ -181,6 +196,28 @@ void OW_Engine::renderMenu()
         window.drawImage(tex, x, y, w, h);
     }
 }
+
+void OW_Engine::renderSettings()
+{
+    int startY = 150;
+    int spacing = 80;
+
+    for (int i = 0; i < settingsMenuItems.size(); i++)
+    {
+        MenuItem& item = settingsMenuItems[i];
+
+        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
+        float scale = item.currentScale;
+
+        float w = 480 * scale;
+        float h = 60 * scale;
+        float x = 400 - (w - 480)/2;
+        float y = startY + i * spacing - (h - 60)/2;
+
+        window.drawImage(tex, x, y, w, h);
+    }
+}
+
 
 void OW_Engine::renderSettings()
 {
