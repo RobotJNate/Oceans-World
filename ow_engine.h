@@ -12,8 +12,10 @@ enum class MenuState
 struct MenuItem
 {
     std::string name;
-    bool enabled = true; // for Freeplay or disabled buttons
+    bool enabled = true;        // for Freeplay or disabled buttons
     bool isPlaceholder = false; // * buttons
+    std::string texNormal;      // normal image
+    std::string texHighlight;   // highlighted image
 };
 
 class OW_Engine
@@ -28,7 +30,6 @@ private:
     void update(float deltaTime);
     void render();
 
-    // helpers
     void renderMenu();
     void renderSettings();
 
@@ -41,7 +42,10 @@ private:
     std::vector<MenuItem> settingsMenuItems;
     int selectedIndex = 0;
 
-    // Settings variables
-    int volume = 3; // 1-10
-    bool downscroll = false; // notes go down instead
+    // Settings
+    int volume = 3;         // 1-10
+    bool downscroll = false;
+
+    // menu music
+    std::string menuMusicPath;
 };
