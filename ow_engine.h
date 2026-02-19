@@ -8,6 +8,7 @@ public:
     void run();
     void shutdown();
 
+    void drawRect(float x, float y, float width, float height, int r, int g, int b);
 private:
     void processInput();
     void update(float deltaTime);
