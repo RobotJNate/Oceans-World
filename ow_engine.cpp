@@ -28,6 +28,7 @@ bool OW_Engine::init()
     selectedIndex = 0;
     currentMenu = MenuState::MAIN;
     menuMusicPath = "menu_music.mp3";
+    backButton = {"Back", true, false, "back_normal.png", "back_highlight.png"};
 
     // play menu music loop
     std::string cmd = "open \"" + menuMusicPath + "\" type mpegvideo alias menuMusic";
