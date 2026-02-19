@@ -73,13 +73,16 @@ void OW_Window::beginFrame()
     GetClientRect(hwnd, &rect);
     HBRUSH brush = CreateSolidBrush(RGB(30, 30, 30)); // background color
     FillRect(hdc, &rect, brush);
+    FillRect(backBufferDC, &rect, brush); // clear the backbuffer
     DeleteObject(brush);
     ReleaseDC(hwnd, hdc);
 }
 
 void OW_Window::endFrame()
 {
-    // nothing yet for GDI
+    HDC windowDC = GetDC(hwnd);
+    BitBlt(windowDC, 0, 0, rectWidth, rectHeight, backBufferDC, 0, 0, SRCCOPY);
+    ReleaseDC(hwnd, windowDC);
 }
 
 bool OW_Window::isKeyPressed(int vk)
@@ -90,7 +93,6 @@ bool OW_Window::isKeyPressed(int vk)
 
 void OW_Window::drawRect(float x, float y, float width, float height, int r, int g, int b)
 {
-    HDC hdc = GetDC(hwnd);
     RECT rect;
     rect.left = static_cast<LONG>(x);
     rect.top = static_cast<LONG>(y);
@@ -98,10 +100,10 @@ void OW_Window::drawRect(float x, float y, float width, float height, int r, int
     rect.bottom = static_cast<LONG>(y + height);
 
     HBRUSH brush = CreateSolidBrush(RGB(r, g, b));
-    FillRect(hdc, &rect, brush);
+    FillRect(backBufferDC, &rect, brush); // draw to backbuffer
     DeleteObject(brush);
-    ReleaseDC(hwnd, hdc);
 }
+
 
 LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -133,9 +135,20 @@ LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 
 void OW_Window::destroy()
 {
+    if (backBufferDC)
+    {
+        SelectObject(backBufferDC, oldBitmap);
+        DeleteObject(backBufferBitmap);
+        DeleteDC(backBufferDC);
+        backBufferDC = nullptr;
+        backBufferBitmap = nullptr;
+        oldBitmap = nullptr;
+    }
+
     if (hwnd)
     {
         ::DestroyWindow(hwnd);
         hwnd = nullptr;
     }
 }
+
