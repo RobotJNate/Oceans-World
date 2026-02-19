@@ -41,6 +41,14 @@ bool OW_Window::create(int width, int height, const std::string& title)
     }
 
     ShowWindow(hwnd, SW_SHOW);
+
+    // create backbuffer
+    HDC windowDC = GetDC(hwnd);
+    backBufferDC = CreateCompatibleDC(windowDC);
+    backBufferBitmap = CreateCompatibleBitmap(windowDC, width, height);
+    oldBitmap = (HBITMAP)SelectObject(backBufferDC, backBufferBitmap);
+    ReleaseDC(hwnd, windowDC);
+    
     running = true;
     return true;
 }
