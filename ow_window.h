@@ -3,6 +3,8 @@
 #include <string>
 #include <unordered_map>
 
+void drawRect(float x, float y, float width, float height, int r, int g, int b);
+
 class OW_Window
 {
 public:
