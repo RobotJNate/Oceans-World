@@ -236,4 +236,13 @@ void OW_Engine::renderSettings()
 
         window.drawImage(tex, x, y, w, h);
     }
+
+    float scale = backButton.currentScale;
+    float w = 120 * scale;   // adjust size as needed
+    float h = 50 * scale;
+    float x = windowWidth - w - 20; // 20 px margin from right
+    float y = 20;                  // 20 px margin from top
+    
+    std::string tex = (settingsBackSelected) ? backButton.texHighlight : backButton.texNormal;
+    window.drawImage(tex, x, y, w, h, menuAlpha);
 }
