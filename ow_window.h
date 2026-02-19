@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <string>
+#include <unordered_map>
 
 class OW_Window
 {
@@ -14,9 +15,13 @@ public:
     void endFrame();
     void destroy();
 
+    bool isKeyPressed(int vk); // check if a key is down
+
 private:
     HWND hwnd = nullptr;
     bool running = false;
+
+    std::unordered_map<int, bool> keyStates; // VK key -> pressed state
 
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
