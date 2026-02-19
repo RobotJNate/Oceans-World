@@ -1,6 +1,11 @@
 #pragma once
 #include "ow_window.h"
 
+float rectX = 100.0f;
+float rectY = 100.0f;
+float rectWidth = 50.0f;
+float rectHeight = 50.0f;
+
 class OW_Engine
 {
 public:
