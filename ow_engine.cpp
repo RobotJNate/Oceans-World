@@ -66,6 +66,13 @@ void OW_Engine::shutdown()
     std::cout << "Engine shutdown complete.\n";
 }
 
+void OW_Engine::startFade(MenuState toMenu)
+{
+    fading = true;
+    targetAlpha = 0.0f; // fade out
+    nextMenu = toMenu;
+}
+
 void OW_Engine::processInput()
 {
     static bool upPressedLast = false;
@@ -109,10 +116,7 @@ void OW_Engine::processInput()
             {
                 if (selected.name == "Exit") running = false;
                 else if (selected.name == "Settings")
-                {
-                    currentMenu = MenuState::SETTINGS;
-                    selectedIndex = 0;
-                }
+                    startFade(MenuState::SETTINGS); // <-- use fade now
             }
             else if (currentMenu == MenuState::SETTINGS)
             {
@@ -122,6 +126,8 @@ void OW_Engine::processInput()
                     if (volume > 10) volume = 10;
                     selected.name = "Volume: " + std::to_string(volume);
                 }
+                else if (selected.name.find("Back") != std::string::npos)
+                    startFade(MenuState::MAIN); // <-- fade back to main menu
             }
         }
         enterPressedLast = true;
@@ -159,6 +165,22 @@ void OW_Engine::update(float deltaTime)
         float diff = item.targetScale - item.currentScale;
         item.currentScale += diff * (1 - expf(-speed * deltaTime));
     }
+
+    if (fading)
+    {
+        float diff = targetAlpha - menuAlpha;
+        menuAlpha += diff * (1 - expf(-fadeSpeed * deltaTime));
+    
+        // when fully faded out
+        if (menuAlpha <= 0.01f)
+        {
+            currentMenu = nextMenu;
+            targetAlpha = 1.0f; // fade back in
+        }
+    
+        if (menuAlpha >= 0.99f && targetAlpha == 1.0f)
+            fading = false;
+    }
 }
 
 void OW_Engine::render()
@@ -190,7 +212,7 @@ void OW_Engine::renderMenu()
         float x = 400 - (w - 480)/2;
         float y = startY + i * spacing - (h - 60)/2;
 
-        window.drawImage(tex, x, y, w, h);
+        window.drawImage(tex, x, y, w, h, menuAlpha);
     }
 }
 
