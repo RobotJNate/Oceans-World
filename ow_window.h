@@ -9,24 +9,18 @@ public:
     OW_Window();
     ~OW_Window();
 
-    bool create(int width, int height, const std::string& title);
+    bool create(int width, int height, const std::string& title, bool fullscreen = false);
     void pollEvents();
     void beginFrame();
     void endFrame();
     void destroy();
 
     bool isKeyPressed(int vk);
-    void drawImage(const std::string& path, float x, float y, float width, float height, float alpha = 1.0f);
 
-private:
-    HWND hwnd = nullptr;
-    bool running = false;
+    // dynamic resolution
+    int getWidth()  const { return windowWidth; }
+    int getHeight() const { return windowHeight; }
 
-    HDC backBufferDC = nullptr;
-    HBITMAP backBufferBitmap = nullptr;
-    HBITMAP oldBitmap = nullptr;
+    void drawImage(const std::string& texturePath, float x, float y, float w, float h, float alpha);
 
-    std::unordered_map<int, bool> keyStates;
-
-    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-};
+private
