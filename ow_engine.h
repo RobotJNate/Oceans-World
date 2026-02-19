@@ -2,6 +2,8 @@
 #include "ow_window.h"
 #include <string>
 #include <vector>
+#include "ow_lua.h"
+OW_Lua lua;
 
 enum class MenuState
 {
