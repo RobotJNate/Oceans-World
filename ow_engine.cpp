@@ -21,10 +21,8 @@ void OW_Engine::run()
 
     while (running)
     {
-        // handle windows messages
-        window.pollEvents();
+        window.pollEvents(); // handle messages + update keyStates
 
-        // delta time
         auto currentTime = clock::now();
         float deltaTime =
             std::chrono::duration<float>(currentTime - lastTime).count();
@@ -44,12 +42,12 @@ void OW_Engine::shutdown()
 
 void OW_Engine::processInput()
 {
-    // input handling, key presses, etc
+    // placeholder for engine input handling
 }
 
 void OW_Engine::update(float deltaTime)
 {
-    // move a rectangle with arrow keys
+    // move rectangle with arrow keys
     if (window.isKeyPressed(VK_LEFT))
         rectX -= 200.0f * deltaTime;
     if (window.isKeyPressed(VK_RIGHT))
@@ -69,8 +67,7 @@ void OW_Engine::render()
     window.beginFrame();
 
     // draw the rectangle
-    window.drawRect(rectX, rectY, rectWidth, rectHeight, 255, 0, 0); // red rect
+    window.drawRect(rectX, rectY, rectWidth, rectHeight, 255, 0, 0);
 
     window.endFrame();
 }
-
