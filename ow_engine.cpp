@@ -197,6 +197,27 @@ void OW_Engine::renderMenu()
     }
 }
 
+void OW_Engine::renderMenu()
+{
+    int startY = 150;
+    int spacing = 80;
+
+    for (int i = 0; i < mainMenuItems.size(); i++)
+    {
+        MenuItem& item = mainMenuItems[i];
+
+        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
+        float scale = item.currentScale;
+
+        float w = 480 * scale;
+        float h = 60 * scale;
+        float x = 400 - (w - 480)/2;
+        float y = startY + i * spacing - (h - 60)/2;
+
+        window.drawImage(tex, x, y, w, h);
+    }
+}
+
 void OW_Engine::renderSettings()
 {
     int startY = 150;
@@ -218,24 +239,3 @@ void OW_Engine::renderSettings()
     }
 }
 
-
-void OW_Engine::renderSettings()
-{
-    int startY = 150;
-    int spacing = 80;
-
-    for (int i = 0; i < settingsMenuItems.size(); i++)
-    {
-        MenuItem& item = settingsMenuItems[i];
-
-        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
-        float scale = (i == selectedIndex) ? 1.0145f : 1.0f;
-
-        float w = 480 * scale;
-        float h = 60 * scale;
-        float x = 400 - (w - 480)/2;
-        float y = startY + i * spacing - (h - 60)/2;
-
-        window.drawImage(tex, x, y, w, h);
-    }
-}
