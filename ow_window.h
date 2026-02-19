@@ -15,17 +15,18 @@ public:
     void endFrame();
     void destroy();
 
-    bool isKeyPressed(int vk); // check key state
-    void drawRect(float x, float y, float width, float height, int r, int g, int b);
+    bool isKeyPressed(int vk);
+    void drawImage(const std::string& path, float x, float y, float width, float height);
 
 private:
     HWND hwnd = nullptr;
     bool running = false;
-    std::unordered_map<int, bool> keyStates; // VK key -> pressed
 
     HDC backBufferDC = nullptr;
     HBITMAP backBufferBitmap = nullptr;
     HBITMAP oldBitmap = nullptr;
+
+    std::unordered_map<int, bool> keyStates;
 
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
