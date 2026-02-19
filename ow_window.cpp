@@ -1,5 +1,8 @@
 #include "ow_window.h"
 #include <iostream>
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+using namespace Gdiplus;
 
 OW_Window::OW_Window() {}
 OW_Window::~OW_Window() {}
@@ -20,7 +23,6 @@ bool OW_Window::create(int width, int height, const std::string& title)
         return false;
     }
 
-    // pass 'this' pointer for WindowProc access
     hwnd = CreateWindowEx(
         0,
         CLASS_NAME,
@@ -42,13 +44,13 @@ bool OW_Window::create(int width, int height, const std::string& title)
 
     ShowWindow(hwnd, SW_SHOW);
 
-    // create backbuffer
+    // backbuffer
     HDC windowDC = GetDC(hwnd);
     backBufferDC = CreateCompatibleDC(windowDC);
     backBufferBitmap = CreateCompatibleBitmap(windowDC, width, height);
     oldBitmap = (HBITMAP)SelectObject(backBufferDC, backBufferBitmap);
     ReleaseDC(hwnd, windowDC);
-    
+
     running = true;
     return true;
 }
@@ -68,20 +70,19 @@ void OW_Window::pollEvents()
 
 void OW_Window::beginFrame()
 {
-    HDC hdc = GetDC(hwnd);
     RECT rect;
     GetClientRect(hwnd, &rect);
-    HBRUSH brush = CreateSolidBrush(RGB(30, 30, 30)); // background color
-    FillRect(hdc, &rect, brush);
-    FillRect(backBufferDC, &rect, brush); // clear the backbuffer
+    HBRUSH brush = CreateSolidBrush(RGB(30, 30, 30));
+    FillRect(backBufferDC, &rect, brush);
     DeleteObject(brush);
-    ReleaseDC(hwnd, hdc);
 }
 
 void OW_Window::endFrame()
 {
     HDC windowDC = GetDC(hwnd);
-    BitBlt(windowDC, 0, 0, rectWidth, rectHeight, backBufferDC, 0, 0, SRCCOPY);
+    RECT rect;
+    GetClientRect(hwnd, &rect);
+    BitBlt(windowDC, 0, 0, rect.right, rect.bottom, backBufferDC, 0, 0, SRCCOPY);
     ReleaseDC(hwnd, windowDC);
 }
 
@@ -91,19 +92,23 @@ bool OW_Window::isKeyPressed(int vk)
     return it != keyStates.end() && it->second;
 }
 
-void OW_Window::drawRect(float x, float y, float width, float height, int r, int g, int b)
+void OW_Window::drawImage(const std::string& path, float x, float y, float width, float height)
 {
-    RECT rect;
-    rect.left = static_cast<LONG>(x);
-    rect.top = static_cast<LONG>(y);
-    rect.right = static_cast<LONG>(x + width);
-    rect.bottom = static_cast<LONG>(y + height);
+    static bool gdiplusStarted = false;
+    static ULONG_PTR gdiplusToken;
 
-    HBRUSH brush = CreateSolidBrush(RGB(r, g, b));
-    FillRect(backBufferDC, &rect, brush); // draw to backbuffer
-    DeleteObject(brush);
+    if (!gdiplusStarted)
+    {
+        GdiplusStartupInput gdiplusStartupInput;
+        GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, nullptr);
+        gdiplusStarted = true;
+    }
+
+    Graphics graphics(backBufferDC);
+    std::wstring wpath(path.begin(), path.end());
+    Image image(wpath.c_str());
+    graphics.DrawImage(&image, x, y, width, height);
 }
-
 
 LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -118,12 +123,10 @@ LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
         break;
     }
     case WM_KEYDOWN:
-        if (window)
-            window->keyStates[wParam] = true;
+        if (window) window->keyStates[wParam] = true;
         break;
     case WM_KEYUP:
-        if (window)
-            window->keyStates[wParam] = false;
+        if (window) window->keyStates[wParam] = false;
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
@@ -151,4 +154,3 @@ void OW_Window::destroy()
         hwnd = nullptr;
     }
 }
-
