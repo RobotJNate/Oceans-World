@@ -1,16 +1,17 @@
 #include "ow_engine.h"
 #include <chrono>
 #include <iostream>
-#include <mmsystem.h>
 #include <cmath>
+#include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
 bool OW_Engine::init()
 {
-    if (!window.create(1280, 720, "Ocean's Funky World"))
+    // fullscreen = true for fullscreen, false for windowed
+    if (!window.create(1280, 720, "Ocean's Funky World", true))
         return false;
 
-    // MAIN MENU
+    // main menu
     mainMenuItems = {
         {"Story Mode", true, true, "story_normal.png", "story_highlight.png"},
         {"Freeplay", false, true, "freeplay_normal.png", "freeplay_highlight.png"},
@@ -18,19 +19,22 @@ bool OW_Engine::init()
         {"Exit", true, false, "exit_normal.png", "exit_highlight.png"}
     };
 
-    // SETTINGS MENU
+    // settings menu
     settingsMenuItems = {
         {"Volume: 3", true, false, "volume_normal.png", "volume_highlight.png"},
         {"Downscroll: OFF", true, true, "downscroll_normal.png", "downscroll_highlight.png"},
         {"Keybinds [D F J K]", true, true, "keybinds_normal.png", "keybinds_highlight.png"}
     };
 
-    selectedIndex = 0;
-    currentMenu = MenuState::MAIN;
-    menuMusicPath = "menu_music.mp3";
+    // back button
     backButton = {"Back", true, false, "back_normal.png", "back_highlight.png"};
 
-    // play menu music loop
+    selectedIndex = 0;
+    settingsBackSelected = false;
+    currentMenu = MenuState::MAIN;
+
+    // menu music
+    menuMusicPath = "menu_music.mp3";
     std::string cmd = "open \"" + menuMusicPath + "\" type mpegvideo alias menuMusic";
     mciSendString(cmd.c_str(), nullptr, 0, nullptr);
     mciSendString("play menuMusic repeat", nullptr, 0, nullptr);
@@ -81,6 +85,7 @@ void OW_Engine::processInput()
     static bool enterPressedLast = false;
 
     auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
+    int maxIndex = (currentMenu == MenuState::SETTINGS) ? settingsMenuItems.size() : items.size();
 
     // UP
     if (window.isKeyPressed(VK_UP))
@@ -88,7 +93,7 @@ void OW_Engine::processInput()
         if (!upPressedLast)
         {
             selectedIndex--;
-            if (selectedIndex < 0) selectedIndex = items.size() - 1;
+            if (selectedIndex < 0) selectedIndex = maxIndex - 1;
         }
         upPressedLast = true;
     }
@@ -100,7 +105,7 @@ void OW_Engine::processInput()
         if (!downPressedLast)
         {
             selectedIndex++;
-            if (selectedIndex >= items.size()) selectedIndex = 0;
+            if (selectedIndex >= maxIndex) selectedIndex = 0;
         }
         downPressedLast = true;
     }
@@ -111,24 +116,28 @@ void OW_Engine::processInput()
     {
         if (!enterPressedLast)
         {
-            MenuItem& selected = items[selectedIndex];
-
             if (currentMenu == MenuState::MAIN)
             {
+                MenuItem& selected = items[selectedIndex];
                 if (selected.name == "Exit") running = false;
-                else if (selected.name == "Settings")
-                    startFade(MenuState::SETTINGS); // <-- use fade now
+                else if (selected.name == "Settings") startFade(MenuState::SETTINGS);
             }
             else if (currentMenu == MenuState::SETTINGS)
             {
-                if (selected.name.find("Volume") != std::string::npos)
+                if (selectedIndex < settingsMenuItems.size())
                 {
-                    volume++;
-                    if (volume > 10) volume = 10;
-                    selected.name = "Volume: " + std::to_string(volume);
+                    MenuItem& selected = settingsMenuItems[selectedIndex];
+                    if (selected.name.find("Volume") != std::string::npos)
+                    {
+                        volume++;
+                        if (volume > 10) volume = 10;
+                        selected.name = "Volume: " + std::to_string(volume);
+                    }
                 }
-                else if (selected.name.find("Back") != std::string::npos)
-                    startFade(MenuState::MAIN); // <-- fade back to main menu
+                else // last "index" = Back button
+                {
+                    startFade(MenuState::MAIN);
+                }
             }
         }
         enterPressedLast = true;
@@ -138,47 +147,50 @@ void OW_Engine::processInput()
     // ESC
     if (window.isKeyPressed(VK_ESCAPE))
     {
-        if (currentMenu == MenuState::SETTINGS)
-        {
-            currentMenu = MenuState::MAIN;
-            selectedIndex = 0;
-        }
-        else
-        {
-            running = false;
-        }
+        if (currentMenu == MenuState::SETTINGS) startFade(MenuState::MAIN);
+        else running = false;
     }
+
+    // track back button selection
+    if (currentMenu == MenuState::SETTINGS && selectedIndex == settingsMenuItems.size())
+        settingsBackSelected = true;
+    else
+        settingsBackSelected = false;
 }
 
-// update handles easing scaling for buttons
 void OW_Engine::update(float deltaTime)
 {
     auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
 
-    // set target scale based on selection
+    // button target scales
     for (int i = 0; i < items.size(); i++)
         items[i].targetScale = (i == selectedIndex) ? 1.0145f : 1.0f;
 
-    // easing out tween
-    float speed = 8.0f; // tweak for faster/slower easing
+    // easing tween
+    float speed = 8.0f;
     for (auto& item : items)
     {
         float diff = item.targetScale - item.currentScale;
         item.currentScale += diff * (1 - expf(-speed * deltaTime));
     }
 
+    // back button scaling
+    backButton.targetScale = settingsBackSelected ? 1.0145f : 1.0f;
+    float diff = backButton.targetScale - backButton.currentScale;
+    backButton.currentScale += diff * (1 - expf(-speed * deltaTime));
+
+    // menu fade tween
     if (fading)
     {
-        float diff = targetAlpha - menuAlpha;
-        menuAlpha += diff * (1 - expf(-fadeSpeed * deltaTime));
-    
-        // when fully faded out
+        float diffAlpha = targetAlpha - menuAlpha;
+        menuAlpha += diffAlpha * (1 - expf(-fadeSpeed * deltaTime));
+
         if (menuAlpha <= 0.01f)
         {
             currentMenu = nextMenu;
-            targetAlpha = 1.0f; // fade back in
+            targetAlpha = 1.0f;
         }
-    
+
         if (menuAlpha >= 0.99f && targetAlpha == 1.0f)
             fading = false;
     }
@@ -188,10 +200,8 @@ void OW_Engine::render()
 {
     window.beginFrame();
 
-    if (currentMenu == MenuState::MAIN)
-        renderMenu();
-    else if (currentMenu == MenuState::SETTINGS)
-        renderSettings();
+    if (currentMenu == MenuState::MAIN) renderMenu();
+    else if (currentMenu == MenuState::SETTINGS) renderSettings();
 
     window.endFrame();
 }
@@ -204,7 +214,6 @@ void OW_Engine::renderMenu()
     for (int i = 0; i < mainMenuItems.size(); i++)
     {
         MenuItem& item = mainMenuItems[i];
-
         std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
         float scale = item.currentScale;
 
@@ -225,24 +234,4 @@ void OW_Engine::renderSettings()
     for (int i = 0; i < settingsMenuItems.size(); i++)
     {
         MenuItem& item = settingsMenuItems[i];
-
-        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
-        float scale = item.currentScale;
-
-        float w = 480 * scale;
-        float h = 60 * scale;
-        float x = 400 - (w - 480)/2;
-        float y = startY + i * spacing - (h - 60)/2;
-
-        window.drawImage(tex, x, y, w, h);
-    }
-
-    float scale = backButton.currentScale;
-    float w = 120 * scale;   // adjust size as needed
-    float h = 50 * scale;
-    float x = windowWidth - w - 20; // 20 px margin from right
-    float y = 20;                  // 20 px margin from top
-    
-    std::string tex = (settingsBackSelected) ? backButton.texHighlight : backButton.texNormal;
-    window.drawImage(tex, x, y, w, h, menuAlpha);
-}
+        std:
