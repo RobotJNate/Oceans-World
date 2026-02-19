@@ -2,6 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include <mmsystem.h>
+#include <cmath>
 #pragma comment(lib, "winmm.lib")
 
 bool OW_Engine::init()
@@ -26,7 +27,6 @@ bool OW_Engine::init()
 
     selectedIndex = 0;
     currentMenu = MenuState::MAIN;
-
     menuMusicPath = "menu_music.mp3";
 
     // play menu music loop
@@ -113,7 +113,6 @@ void OW_Engine::processInput()
                     currentMenu = MenuState::SETTINGS;
                     selectedIndex = 0;
                 }
-                // placeholders * do nothing
             }
             else if (currentMenu == MenuState::SETTINGS)
             {
@@ -144,25 +143,23 @@ void OW_Engine::processInput()
     }
 }
 
+// update handles easing scaling for buttons
 void OW_Engine::update(float deltaTime)
 {
     auto& items = (currentMenu == MenuState::MAIN) ? mainMenuItems : settingsMenuItems;
 
     // set target scale based on selection
     for (int i = 0; i < items.size(); i++)
-    {
         items[i].targetScale = (i == selectedIndex) ? 1.0145f : 1.0f;
-    }
 
-    // easing out tween for scaling
-    float speed = 8.0f; // tweak this for faster/slower easing
+    // easing out tween
+    float speed = 8.0f; // tweak for faster/slower easing
     for (auto& item : items)
     {
         float diff = item.targetScale - item.currentScale;
         item.currentScale += diff * (1 - expf(-speed * deltaTime));
     }
 }
-
 
 void OW_Engine::render()
 {
@@ -174,27 +171,6 @@ void OW_Engine::render()
         renderSettings();
 
     window.endFrame();
-}
-
-void OW_Engine::renderMenu()
-{
-    int startY = 150;
-    int spacing = 80;
-
-    for (int i = 0; i < mainMenuItems.size(); i++)
-    {
-        MenuItem& item = mainMenuItems[i];
-
-        std::string tex = (i == selectedIndex) ? item.texHighlight : item.texNormal;
-        float scale = item.currentScale;
-
-        float w = 480 * scale;
-        float h = 60 * scale;
-        float x = 400 - (w - 480)/2;
-        float y = startY + i * spacing - (h - 60)/2;
-
-        window.drawImage(tex, x, y, w, h);
-    }
 }
 
 void OW_Engine::renderMenu()
@@ -238,4 +214,3 @@ void OW_Engine::renderSettings()
         window.drawImage(tex, x, y, w, h);
     }
 }
-
