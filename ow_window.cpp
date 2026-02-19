@@ -25,3 +25,18 @@ LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
+
+void OW_Window::drawRect(float x, float y, float width, float height, int r, int g, int b)
+{
+    HDC hdc = GetDC(hwnd);
+    RECT rect;
+    rect.left = static_cast<LONG>(x);
+    rect.top = static_cast<LONG>(y);
+    rect.right = static_cast<LONG>(x + width);
+    rect.bottom = static_cast<LONG>(y + height);
+
+    HBRUSH brush = CreateSolidBrush(RGB(r, g, b));
+    FillRect(hdc, &rect, brush);
+    DeleteObject(brush);
+    ReleaseDC(hwnd, hdc);
+}
