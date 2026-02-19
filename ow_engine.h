@@ -1,5 +1,20 @@
 #pragma once
 #include "ow_window.h"
+#include <vector>
+#include <string>
+
+enum class MenuState
+{
+    MAIN,
+    SETTINGS
+};
+
+struct MenuItem
+{
+    std::string name;
+    bool enabled = true; // for Freeplay or disabled buttons
+    bool isPlaceholder = false; // * buttons
+};
 
 class OW_Engine
 {
@@ -13,12 +28,20 @@ private:
     void update(float deltaTime);
     void render();
 
-    bool running = false;
-    OW_Window window; // window layer
+    // helpers
+    void renderMenu();
+    void renderSettings();
 
-    // rectangle test
-    float rectX = 100.0f;
-    float rectY = 100.0f;
-    float rectWidth = 50.0f;
-    float rectHeight = 50.0f;
+    bool running = false;
+    OW_Window window;
+
+    // menu
+    MenuState currentMenu = MenuState::MAIN;
+    std::vector<MenuItem> mainMenuItems;
+    std::vector<MenuItem> settingsMenuItems;
+    int selectedIndex = 0;
+
+    // Settings variables
+    int volume = 3; // 1-10
+    bool downscroll = false; // notes go down instead
 };
