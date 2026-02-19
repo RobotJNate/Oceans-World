@@ -23,5 +23,9 @@ private:
     bool running = false;
     std::unordered_map<int, bool> keyStates; // VK key -> pressed
 
+    HDC backBufferDC = nullptr;
+    HBITMAP backBufferBitmap = nullptr;
+    HBITMAP oldBitmap = nullptr;
+
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
