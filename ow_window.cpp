@@ -92,7 +92,7 @@ bool OW_Window::isKeyPressed(int vk)
     return it != keyStates.end() && it->second;
 }
 
-void OW_Window::drawImage(const std::string& path, float x, float y, float width, float height)
+void OW_Window::drawImage(const std::string& path, float x, float y, float width, float height, float alpha)
 {
     static bool gdiplusStarted = false;
     static ULONG_PTR gdiplusToken;
@@ -105,10 +105,25 @@ void OW_Window::drawImage(const std::string& path, float x, float y, float width
     }
 
     Graphics graphics(backBufferDC);
+    graphics.SetCompositingMode(CompositingModeSourceOver);
+
     std::wstring wpath(path.begin(), path.end());
     Image image(wpath.c_str());
-    graphics.DrawImage(&image, x, y, width, height);
+
+    ColorMatrix cm;
+    memset(&cm, 0, sizeof(ColorMatrix));
+    cm.m[0][0] = 1.0f;
+    cm.m[1][1] = 1.0f;
+    cm.m[2][2] = 1.0f;
+    cm.m[3][3] = alpha; // alpha for fade
+    cm.m[4][4] = 1.0f;
+
+    ImageAttributes ia;
+    ia.SetColorMatrix(&cm, ColorMatrixFlagsDefault, ColorAdjustTypeBitmap);
+
+    graphics.DrawImage(&image, RectF(x, y, width, height), 0, 0, image.GetWidth(), image.GetHeight(), UnitPixel, &ia);
 }
+
 
 LRESULT CALLBACK OW_Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
