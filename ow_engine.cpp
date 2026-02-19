@@ -49,12 +49,28 @@ void OW_Engine::processInput()
 
 void OW_Engine::update(float deltaTime)
 {
-    // game logic, menu, settings, notes, etc
+    // move a rectangle with arrow keys
+    if (window.isKeyPressed(VK_LEFT))
+        rectX -= 200.0f * deltaTime;
+    if (window.isKeyPressed(VK_RIGHT))
+        rectX += 200.0f * deltaTime;
+    if (window.isKeyPressed(VK_UP))
+        rectY -= 200.0f * deltaTime;
+    if (window.isKeyPressed(VK_DOWN))
+        rectY += 200.0f * deltaTime;
+
+    // close window on ESC
+    if (window.isKeyPressed(VK_ESCAPE))
+        running = false;
 }
 
 void OW_Engine::render()
 {
     window.beginFrame();
-    // draw stuff here
+
+    // draw the rectangle
+    window.drawRect(rectX, rectY, rectWidth, rectHeight, 255, 0, 0); // red rect
+
     window.endFrame();
 }
+
