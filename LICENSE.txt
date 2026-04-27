@@ -1,16 +1,16 @@
-Ocean’s World Proprietary License 
+Ocean's World Proprietary License
 Copyright (C) Ocean The Protogen / Joshua N. Merchant [2026]. All rights reserved.
 
-1. Grant of License
-This software, including all source code, assets, images, sounds, documentation, executable files, scripts, and 
-any other associated materials (“Software”), is the exclusive property of the copyright holder. Permission to 
-use this Software is granted only for personal, non-commercial purposes, and strictly in accordance with the 
-terms of this license. Any other use—including but not limited to commercial exploitation, redistribution, 
-modification, incorporation into other works, or public display—requires express prior written authorization 
-from the copyright holder. The license does not grant any ownership or intellectual property rights to the 
+1: Grant of License
+This software, including all source code, assets, images, sounds, documentation, executable files, scripts, and
+any other associated materials ("Software"), is the exclusive property of the copyright holder. Permission to
+use this Software is granted only for personal, non-commercial purposes, and strictly in accordance with the
+terms of this license. Any other use—including but not limited to commercial exploitation, redistribution,
+modification, incorporation into other works, or public display—requires express prior written authorization
+from the copyright holder. The license does not grant any ownership or intellectual property rights to the
 user, and all rights not expressly granted herein are retained exclusively by the copyright holder.
 
-2. Comprehensive Restrictions
+2: Comprehensive Restrictions
 Without prior written consent from the copyright holder, you are strictly prohibited from engaging in any of the following actions:
 Copying, reproducing, or duplicating the Software, whether in whole or in part, in any format.
 Modifying, adapting, translating, reverse-engineering, decompiling, disassembling, or creating derivative works based on the Software.
@@ -21,58 +21,57 @@ Using screenshots, recordings, gameplay footage, or any visual/audio representat
 Reusing, copying, or partially embedding any code, assets, or scripts from the Software in other projects, applications, or engines.
 Attempting to bypass, circumvent, or violate any technical protections, licensing mechanisms, or digital rights management included with the Software.
 
-3. Ownership and Intellectual Property
-All rights, title, and interest in and to the Software, including copyrights, trademarks, patents, 
-trade secrets, and other intellectual property rights, remain exclusively with the copyright holder. 
-The user is granted no rights of ownership, and nothing in this license shall be interpreted to confer 
-any rights other than the limited, personal, non-commercial usage rights explicitly stated herein. 
-Unauthorized use of the Software constitutes infringement of intellectual property and may be subject 
+3: Ownership and Intellectual Property
+All rights, title, and interest in and to the Software, including copyrights, trademarks, patents,
+trade secrets, and other intellectual property rights, remain exclusively with the copyright holder.
+The user is granted no rights of ownership, and nothing in this license shall be interpreted to confer
+any rights other than the limited, personal, non-commercial usage rights explicitly stated herein.
+Unauthorized use of the Software constitutes infringement of intellectual property and may be subject
 to civil and criminal enforcement.
 
-4. Attribution and Moral Rights
-Users must not remove, alter, obscure, or tamper with any copyright notices, trademarks, moral rights, or proprietary 
-markings contained in the Software. Misrepresentation, false attribution, or claiming ownership of the Software or 
+4: Attribution and Moral Rights
+Users must not remove, alter, obscure, or tamper with any copyright notices, trademarks, moral rights, or proprietary
+markings contained in the Software. Misrepresentation, false attribution, or claiming ownership of the Software or
 any part thereof constitutes a material breach of this license and may result in legal action.
 
-5. Updates, Enhancements, and Derivatives
-Any updates, patches, enhancements, bug fixes, or new versions provided by the copyright holder remain fully 
-protected under this license. Redistribution, reuse, or public sharing of updates or enhancements is strictly 
-prohibited unless expressly authorized in writing. Users may not attempt to reverse-engineer, extract, or 
+5: Updates, Enhancements, and Derivatives
+Any updates, patches, enhancements, bug fixes, or new versions provided by the copyright holder remain fully
+protected under this license. Redistribution, reuse, or public sharing of updates or enhancements is strictly
+prohibited unless expressly authorized in writing. Users may not attempt to reverse-engineer, extract, or
 repurpose updates, enhancements, or derivative works for unauthorized purposes.
 
-6. Termination
-Violation of any provision of this license automatically terminates the user’s rights to use the Software. 
+6: Termination
+Violation of any provision of this license automatically terminates the user's rights to use the Software.
 Upon termination, the user must immediately:
 Cease all use of the Software.
 Permanently delete all copies, backups, and stored instances of the Software.
 Refrain from attempting to access, use, or share the Software in any form without express written permission.
-Termination does not absolve the user of liability for any past violations, damages, or legal consequences arising 
+Termination does not absolve the user of liability for any past violations, damages, or legal consequences arising
 from the breach of this license.
 
-7. Enforcement and Legal Remedies
-The copyright holder reserves the right to enforce this license through civil, criminal, or administrative proceedings. 
-Any breach may result in legal action, including claims for damages, injunctive relief, restitution, recovery of legal 
-fees, and any other remedies available under applicable law. Unauthorized modification, redistribution, resale, partial 
+7:Enforcement and Legal Remedies
+The copyright holder reserves the right to enforce this license through civil, criminal, or administrative proceedings.
+Any breach may result in legal action, including claims for damages, injunctive relief, restitution, recovery of legal
+fees, and any other remedies available under applicable law. Unauthorized modification, redistribution, resale, partial
 code reuse, embedding, or commercial use will be treated as a serious legal violation.
 
-8. No Warranty
-The Software is provided “as-is” without warranty of any kind, whether express or implied. The copyright holder makes no 
-guarantees regarding performance, functionality, suitability, security, or fitness for any particular purpose. The user 
+8: No Warranty
+The Software is provided "as-is" without warranty of any kind, whether express or implied. The copyright holder makes no
+guarantees regarding performance, functionality, suitability, security, or fitness for any particular purpose. The user
 assumes all risk associated with the use, inability to use, or reliance upon the Software, and the copyright holder shall
 not be liable for any damages, losses, or issues arising therefrom.
 
-9. Governing Law and Jurisdiction
-This license is governed by and construed in accordance with the laws of [Your Country/State]. Any disputes arising from 
-or relating to the Software or this license shall be resolved exclusively in the courts located within the jurisdiction 
-of the copyright holder. By using the Software, the user expressly consents to the personal and subject-matter jurisdiction 
+9: Governing Law and Jurisdiction
+This license is governed by and construed in accordance with the laws of Oregon, United States. Any disputes arising from
+or relating to the Software or this license shall be resolved exclusively in the courts located within the jurisdiction
+of the copyright holder. By using the Software, the user expressly consents to the personal and subject-matter jurisdiction
 of these courts.
 
-10. Acceptance of Terms
-By accessing, using, or downloading the Software, the user acknowledges that they have read, understood, and agree to b
-e bound by the terms of this license. Any use of the Software constitutes full acceptance of all terms and conditions. 
+10: Acceptance of Terms
+By accessing, using, or downloading the Software, the user acknowledges that they have read, understood, and agree to be bound by the terms of this license. Any use of the Software constitutes full acceptance of all terms and conditions.
 Users who do not agree to these terms are instructed to immediately cease use of the Software.
 
-11. Protective Statement
+11: Protective Statement
 This license explicitly prohibits unauthorized partial or complete use of the Software, including:
 Embedding portions of the code, assets, or scripts in other applications or engines.
 Creating derivative works, forks, or adaptations without express written authorization.
@@ -80,15 +79,72 @@ Any attempt to circumvent licensing or digital protections included with the Sof
 Any attempt to edit, modify, or remove the current licensing.
 The copyright holder reserves all rights to enforce this license to the fullest extent permitted by law.
 
-12. Disclaimer Regarding Other Software
-This Software is independently developed and is not intended to infringe upon the copyright or intellectual property 
-rights of any other software. Specifically, Friday Night Funkin’ is an independent rhythm game software. This 
-Software is a separate engine developed independently and only seeks to mimic the functional style of the 
-Friday Night Funkin’ engine. No part of this Software is copied from, derived from, or intended to violate 
+12: Disclaimer Regarding Other Software
+This Software is independently developed and is not intended to infringe upon the copyright or intellectual property
+rights of any other software. Specifically, Friday Night Funkin' is an independent rhythm game software. This
+Software is a separate engine developed independently and only seeks to mimic the functional style of the
+Friday Night Funkin' engine. No part of this Software is copied from, derived from, or intended to violate
 the intellectual property of any other software.
 
-13. Final Statement
-Unauthorized modification, distribution, resale, partial reuse, embedding, or commercial use of the Software 
-will be treated as a serious legal violation. The copyright holder reserves all rights to pursue remedies under 
-law, and violators may be subject to civil, criminal, or administrative penalties. Compliance with this license 
+13: Final Statement
+Unauthorized modification, distribution, resale, partial reuse, embedding, or commercial use of the Software
+will be treated as a serious legal violation. The copyright holder reserves all rights to pursue remedies under
+law, and violators may be subject to civil, criminal, or administrative penalties. Compliance with this license
 is mandatory and non-negotiable.
+
+14: Modifications, Mods, and Fan-Created Content
+Users are permitted to create modifications, add-ons, custom content, and fan-created works ("Mods") for personal,
+non-commercial use, subject to the following mandatory restrictions:
+
+14.1: Redistribution Prohibition
+Users are strictly prohibited from redistributing, sharing, uploading, hosting, or otherwise making available:
+The original Software or any portion thereof, whether modified or unmodified.
+Any game files, executables, assets, scripts, or code extracted from or belonging to the original Software.
+Modified versions of the Software that include, embed, or package original game code or assets.
+Standalone packages, installers, or distributions that contain any proprietary content from the Software.
+
+14.2: Permitted Mod Distribution
+Mods may only be distributed if they meet all of the following conditions:
+
+The Mod contains only original content created entirely by the mod author (custom assets, scripts, levels, characters, music, etc.).
+The Mod does not include, bundle, or redistribute any files, code, assets, or executables from the original Software.
+The Mod requires the user to possess a legitimate, authorized copy of the original Software to function.
+The Mod is distributed free of charge and is not sold, monetized, or used for commercial purposes without express written permission.
+The Mod clearly indicates that it is unofficial fan content and is not endorsed by or affiliated with the copyright holder.
+
+14.3: Ownership of Fan Content
+Fan-created content, including Mods, remains the intellectual property of the original creator. However, by creating content
+for this Software, mod authors acknowledge that:
+
+The copyright holder retains all rights to the original Software and its underlying systems.
+Mod authors may not claim ownership of, or attempt to restrict access to, any portion of the original Software.
+The copyright holder reserves the right to incorporate fan-created concepts, ideas, or mechanics into future official releases
+without obligation or compensation, though direct copying of fan-created assets will not occur without permission.
+
+14.4: Prohibited Mod Activities
+The following activities are strictly prohibited and constitute a breach of this license:
+Creating or distributing Mods that bypass, remove, or circumvent licensing protections, copyright notices, or digital rights management.
+Reverse-engineering, decompiling, or extracting source code from the Software for the purpose of creating Mods or derivative works.
+Distributing "cracked," "pirated," or otherwise unauthorized versions of the Software under the guise of Mods or fan content.
+Creating Mods that contain malicious code, viruses, malware, or any content intended to harm users or systems.
+Using Mods to misrepresent, defame, or damage the reputation of the Software or the copyright holder.
+Selling, monetizing, or commercially exploiting Mods without express written authorization from the copyright holder.
+
+14.5: Streaming, Videos, and Content Creation
+Users are permitted to create and share gameplay videos, live streams, screenshots, and similar content featuring the Software
+and any Mods, provided that:
+Such content is not presented as official material or endorsed by the copyright holder unless explicitly authorized.
+Revenue generated from content creation platforms (e.g., YouTube, Twitch) through advertising, donations, or subscriptions
+is permitted for transformative commentary, entertainment, or educational content.
+Direct sale or paywall-restricted access to gameplay footage, screenshots, or recordings is prohibited without prior written authorization.
+
+14.6: Copyright Holder's Rights
+The copyright holder reserves the right to:
+Request removal of any Mod or fan content that violates this license or infringes upon the intellectual property of the Software.
+Revoke permission for specific Mods, content, or creators at any time if they are found to be in violation of this license.
+Update, modify, or clarify the terms governing Mods and fan-created content as necessary.
+
+14.7: No Endorsement or Liability
+The copyright holder does not endorse, support, or assume liability for any fan-created Mods or content. Users download, install,
+and use Mods at their own risk. The copyright holder is not responsible for any damages, data loss, system instability, or other
+issues arising from the use of third-party Mods.
