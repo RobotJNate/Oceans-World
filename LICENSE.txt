@@ -79,31 +79,24 @@ Any attempt to circumvent licensing or digital protections included with the Sof
 Any attempt to edit, modify, or remove the current licensing.
 The copyright holder reserves all rights to enforce this license to the fullest extent permitted by law.
 
-12: Disclaimer Regarding Other Software
-This Software is independently developed and is not intended to infringe upon the copyright or intellectual property
-rights of any other software. Specifically, Friday Night Funkin' is an independent rhythm game software. This
-Software is a separate engine developed independently and only seeks to mimic the functional style of the
-Friday Night Funkin' engine. No part of this Software is copied from, derived from, or intended to violate
-the intellectual property of any other software.
-
-13: Final Statement
+12: Final Statement
 Unauthorized modification, distribution, resale, partial reuse, embedding, or commercial use of the Software
 will be treated as a serious legal violation. The copyright holder reserves all rights to pursue remedies under
 law, and violators may be subject to civil, criminal, or administrative penalties. Compliance with this license
 is mandatory and non-negotiable.
 
-14: Modifications, Mods, and Fan-Created Content
+13: Modifications, Mods, and Fan-Created Content
 Users are permitted to create modifications, add-ons, custom content, and fan-created works ("Mods") for personal,
 non-commercial use, subject to the following mandatory restrictions:
 
-14.1: Redistribution Prohibition
+13.1: Redistribution Prohibition
 Users are strictly prohibited from redistributing, sharing, uploading, hosting, or otherwise making available:
 The original Software or any portion thereof, whether modified or unmodified.
 Any game files, executables, assets, scripts, or code extracted from or belonging to the original Software.
 Modified versions of the Software that include, embed, or package original game code or assets.
 Standalone packages, installers, or distributions that contain any proprietary content from the Software.
 
-14.2: Permitted Mod Distribution
+13.2: Permitted Mod Distribution
 Mods may only be distributed if they meet all of the following conditions:
 
 The Mod contains only original content created entirely by the mod author (custom assets, scripts, levels, characters, music, etc.).
@@ -112,7 +105,7 @@ The Mod requires the user to possess a legitimate, authorized copy of the origin
 The Mod is distributed free of charge and is not sold, monetized, or used for commercial purposes without express written permission.
 The Mod clearly indicates that it is unofficial fan content and is not endorsed by or affiliated with the copyright holder.
 
-14.3: Ownership of Fan Content
+13.3: Ownership of Fan Content
 Fan-created content, including Mods, remains the intellectual property of the original creator. However, by creating content
 for this Software, mod authors acknowledge that:
 
@@ -121,7 +114,7 @@ Mod authors may not claim ownership of, or attempt to restrict access to, any po
 The copyright holder reserves the right to incorporate fan-created concepts, ideas, or mechanics into future official releases
 without obligation or compensation, though direct copying of fan-created assets will not occur without permission.
 
-14.4: Prohibited Mod Activities
+13.4: Prohibited Mod Activities
 The following activities are strictly prohibited and constitute a breach of this license:
 Creating or distributing Mods that bypass, remove, or circumvent licensing protections, copyright notices, or digital rights management.
 Reverse-engineering, decompiling, or extracting source code from the Software for the purpose of creating Mods or derivative works.
@@ -130,7 +123,7 @@ Creating Mods that contain malicious code, viruses, malware, or any content inte
 Using Mods to misrepresent, defame, or damage the reputation of the Software or the copyright holder.
 Selling, monetizing, or commercially exploiting Mods without express written authorization from the copyright holder.
 
-14.5: Streaming, Videos, and Content Creation
+13.5: Streaming, Videos, and Content Creation
 Users are permitted to create and share gameplay videos, live streams, screenshots, and similar content featuring the Software
 and any Mods, provided that:
 Such content is not presented as official material or endorsed by the copyright holder unless explicitly authorized.
@@ -138,13 +131,13 @@ Revenue generated from content creation platforms (e.g., YouTube, Twitch) throug
 is permitted for transformative commentary, entertainment, or educational content.
 Direct sale or paywall-restricted access to gameplay footage, screenshots, or recordings is prohibited without prior written authorization.
 
-14.6: Copyright Holder's Rights
+13.6: Copyright Holder's Rights
 The copyright holder reserves the right to:
 Request removal of any Mod or fan content that violates this license or infringes upon the intellectual property of the Software.
 Revoke permission for specific Mods, content, or creators at any time if they are found to be in violation of this license.
 Update, modify, or clarify the terms governing Mods and fan-created content as necessary.
 
-14.7: No Endorsement or Liability
+13.7: No Endorsement or Liability
 The copyright holder does not endorse, support, or assume liability for any fan-created Mods or content. Users download, install,
 and use Mods at their own risk. The copyright holder is not responsible for any damages, data loss, system instability, or other
 issues arising from the use of third-party Mods.
